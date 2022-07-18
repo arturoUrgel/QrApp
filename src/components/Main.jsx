@@ -4,7 +4,8 @@ import React from 'react'
 const Main = () => {
   return (
     <View>
-      <Text>Main Midudev</Text>
+      <Text>Main Midudev3</Text>
+
     </View>
   )
 }
