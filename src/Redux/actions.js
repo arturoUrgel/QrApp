@@ -1,6 +1,7 @@
 export const ADD_QR_SCANNED = "ADD_QR_SCANNED";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const GET_CUIT = "GET_CUIT"
+export const SORT_LIST = "SORT_LIST"
 
 
 export const getCuit = (cuit) => (dispatch) => {
@@ -27,3 +28,11 @@ export const deleteQR = function (payload) {
     payload,
   };
 };
+
+export const sortList = function (payload) {
+    return {
+      type: SORT_LIST,
+      payload,
+    };
+  };
+  

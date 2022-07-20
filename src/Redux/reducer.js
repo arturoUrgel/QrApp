@@ -1,4 +1,4 @@
-import { ADD_QR_SCANNED, DELETE_ITEM, GET_CUIT } from "../Redux/actions";
+import { ADD_QR_SCANNED, DELETE_ITEM, GET_CUIT, SORT_LIST } from "../Redux/actions";
 
 const initialState = {
   facturas: [],
@@ -19,16 +19,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         facturas: state.facturas.filter((m) => m.nroDocRec !== action.payload),
       };
+    case SORT_LIST:
+      return {
+        ...state,
+        facturas: action.payload,
+      };
 /*     case GET_ALL_HOUSES:
       return {
         ...state,
         houses: action.payload,
-      };
-    case GET_HOUSE:
-      return {
-        ...state,
-        house: action.payload,
       }; */
+
     default:
       return {
         ...state,

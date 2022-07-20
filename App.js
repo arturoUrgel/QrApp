@@ -20,12 +20,12 @@ export default function App() {
       <NavigationContainer>
         <View style={styles.container}>
           <Main />
-          <Tabla/>
         </View>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Scanner" component={LectorQr} />
           <Stack.Screen name="Listado" component={Listado} />
+          <Stack.Screen name="Tabla" component={Tabla} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

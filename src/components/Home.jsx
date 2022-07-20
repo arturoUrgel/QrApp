@@ -13,6 +13,7 @@ export default function Home() {
     <View style={styles.container}>
         <Button style={styles.boton} title='Scan' onPress={() => navigation.navigate("Scanner")}/>
         <Button color="#841584" title='Lista' onPress={() => navigation.navigate("Listado")}/>
+        <Button color="#841584" title='Tabla' onPress={() => navigation.navigate("Tabla")}/>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button,TouchableOpacity } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Listado from "./Listado";
 import base64 from "react-native-base64";
@@ -27,14 +27,14 @@ const LectorQr = () => {
     let obj = JSON.parse(base64.decode(data.slice(33)));
 
     fetch(
-      "https://afip.tangofactura.com/Rest/GetContribuyenteFull?cuit=" + obj.nroDocRec
+      "https://afip.tangofactura.com/Rest/GetContribuyenteFull?cuit=" +
+        obj.nroDocRec
     )
       .then((response) => response.json())
       .then((data) => {
-        obj.nombre = data.Contribuyente.nombre
+        obj.nombre = data.Contribuyente.nombre;
         dispatch(addQr(obj));
       });
-   
   };
 
   if (hasPermission === null) {
@@ -49,10 +49,17 @@ const LectorQr = () => {
       <Listado /* data={datos} */ />
       {scanned ? (
         <View>
-          <Button
-            title={"Scannear Otra QR"}
+          <TouchableOpacity
+            style={{ height: 60, margin: 10, backgroundColor: "#33B2FF",borderRadius: 10,  justifyContent: "center",
+            alignItems: "center"}}
             onPress={() => setScanned(false)}
-          />
+          >
+            <Text style= {{fontSize: 30, fontWeight: "bold"}}>Scan QR</Text>
+          </TouchableOpacity>
+
+          {/*          <Button style={{ height: 60}}     title={""}
+            onPress={() => setScanned(false)}
+          /> */}
         </View>
       ) : (
         <BarCodeScanner
@@ -73,4 +80,3 @@ const styles = StyleSheet.create({
 });
 
 export default LectorQr;
-
