@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
 const Main = () => {
   return (
     <View>
-      <Text>Main Midudev3</Text>
-
+      <Text style={{ justifyContent: "center", fontSize: 24, alignItems: "center"}}>
+        FACTURAS AFIP
+      </Text>
     </View>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

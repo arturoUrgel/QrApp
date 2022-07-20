@@ -3,11 +3,16 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Listado from "./Listado";
 import base64 from "react-native-base64";
+import { useDispatch } from "react-redux";
+import { addQr } from "../Redux/actions";
+import { useSelector } from "react-redux";
 
 const LectorQr = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [datos, setDatos] = useState([]);
+  //const [datos, setDatos] = useState([]);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.facturas);
 
   useEffect(() => {
     (async () => {
@@ -19,10 +24,17 @@ const LectorQr = () => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    let obj = JSON.parse(base64.decode(data.slice(33)))
-    console.log(obj)
-    setDatos((oldDatos) => [...oldDatos, obj]);
+    let obj = JSON.parse(base64.decode(data.slice(33)));
 
+    fetch(
+      "https://afip.tangofactura.com/Rest/GetContribuyenteFull?cuit=" + obj.nroDocRec
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        obj.nombre = data.Contribuyente.nombre
+        dispatch(addQr(obj));
+      });
+   
   };
 
   if (hasPermission === null) {
@@ -34,9 +46,9 @@ const LectorQr = () => {
 
   return (
     <View style={styles.container}>
-        <Listado data={datos}  />
+      <Listado /* data={datos} */ />
       {scanned ? (
-        <View>          
+        <View>
           <Button
             title={"Scannear Otra QR"}
             onPress={() => setScanned(false)}
@@ -61,3 +73,4 @@ const styles = StyleSheet.create({
 });
 
 export default LectorQr;
+

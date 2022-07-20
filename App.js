@@ -9,29 +9,33 @@ import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import Home from "./src/components/Home";
 import Listado from "./src/components/Listado";
-import Tabla from "./src/components/Tabla"
+import Tabla from "./src/components/Tabla";
+import { Provider } from "react-redux";
+import store from "./src/Redux/store"
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Main />
-        <Tabla/>
-      </View>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Scanner" component={LectorQr} />
-        <Stack.Screen name="Listado" component={Listado} /> 
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Main />
+          <Tabla/>
+        </View>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Scanner" component={LectorQr} />
+          <Stack.Screen name="Listado" component={Listado} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: Constants.statusBarHeight,
-    flex: 2.2,
+    flex: .07,
     backgroundColor: "#FFFF00",
     //alignItems: "center",
     //justifyContent: "center",
