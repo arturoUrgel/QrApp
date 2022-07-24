@@ -188,7 +188,6 @@ export default function App() {
         keyExtractor={(item, index) => index + ""}
         ListHeaderComponent={tableHeader}
         ListFooterComponent={Footer_Component}
-        /* ListFooterComponentStyle={StyleSheet.footerStyle} */
         stickyHeaderIndices={[0]}
         renderItem={({ item, index }) => {
           return (
