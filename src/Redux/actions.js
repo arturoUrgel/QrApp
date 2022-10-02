@@ -13,7 +13,6 @@ export const getCuit = (cuit) => (dispatch) => {
 };
 
 export const addQr = function (payload) {
-    console.log("PAYLOAD",payload)
   return {
     type: ADD_QR_SCANNED,
     payload: {

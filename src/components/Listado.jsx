@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -7,68 +7,35 @@ import {
   Text,
   StatusBar,
   Button,
+  TextInput,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteQR } from "../Redux/actions";
 
 
 const Listado = () => {
   const state = useSelector((state) => state.facturas);
+  const [number, onChangeNumber] = useState("0");
   const dispatch = useDispatch();
-  const Footer_Component = () => {
-    return (
-      <View
-        style={{
-          height: 60,
-          width: "100%",
-          backgroundColor: "#00BFA5",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ fontSize: 24, color: "white" }}>
-          Total: $
-          {state
-            ?.map((item) => item.importe)
-            .reduce((prev, curr) => prev + curr, 0)}
-        </Text>
-        <Text style={{ fontSize: 24, color: "white" }}>
-          Total: $
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={{ fontSize: 32, color: "black" }}>
+          Facturas: $
           {state
             ?.map((item) => item.importe)
             .reduce((prev, curr) => prev + curr, 0).toFixed(2)}
         </Text>
-      </View>
-    );
-  };
-
-  const Item = ({ title }) => (
-    <View style={styles.item}>
-      <View style={{ flex: 0.7 }}>
-        <Text style={styles.title}>Importe: ${title.importe.toFixed(2)}</Text>
-        <Text style={styles.title}>Factura N:{title.nroDocRec}</Text>
-        <Text style={styles.title}>Nombre: {title.nombre}</Text>
-      </View>
-      <View style={{ flex: 0.3 }}>
-        <Button
-            title={"Eliminar"}
-            onPress={() => dispatch(deleteQR(title.nroDocRec))}
-          />
-      </View>
-    </View>
-  );
-  const renderItem = ({ item }) => <Item title={item} />;
-  let id = 0;
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={state}
-        renderItem={renderItem}
-        keyExtractor={() => id++}
-        ListFooterComponent={Footer_Component}
-        ListFooterComponentStyle={StyleSheet.footerStyle}
+        <TextInput
+        style={styles.input}
+        onChangeText={onChangeNumber}
+        value={number}
+        placeholder="Restar"
+        keyboardType="numeric"
       />
+      <Text Text style={{ fontSize: 32, color: "black" }}>Total: $ {state
+            ?.map((item) => item.importe)
+            .reduce((prev, curr) => prev + curr, 0).toFixed(2) - parseFloat(number).toFixed(2)}</Text>
     </SafeAreaView>
   );
 };
@@ -78,7 +45,9 @@ export default Listado;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    /* marginTop: StatusBar.currentHeight || 0, */
+    paddingTop: StatusBar.currentHeight + 8,
+    backgroundColor: "#AED6F1",
   },
   item: {
     flexDirection: "row",
@@ -88,12 +57,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 16,
+    fontSize: 32,
   },
   footerStyle: {
     borderTopColor: "red",
     borderTopWidth: 2,
     borderBottomColor: "red",
     borderBottomWidth: 2,
+  },
+  input: {
+    fontSize: 32,
+    height: 60,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });

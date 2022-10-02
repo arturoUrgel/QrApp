@@ -2,7 +2,6 @@ import { ADD_QR_SCANNED, DELETE_ITEM, GET_CUIT, SORT_LIST } from "../Redux/actio
 
 const initialState = {
   facturas: [],
-  house: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,11 +23,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         facturas: action.payload,
       };
-/*     case GET_ALL_HOUSES:
-      return {
-        ...state,
-        houses: action.payload,
-      }; */
 
     default:
       return {
