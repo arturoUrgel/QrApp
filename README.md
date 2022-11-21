@@ -1,7 +1,7 @@
 # QrApp
 
 ## About The Project
-Aplicacion con lector Qr para comprobantes digitales emitidos en web Afip, la misma genera una tabla obteniendo la razon social social del receptor del comprobante y el monto de la factura. Es usado por empresa de reparto para la liquidacion de cobranzas.
+Aplicacion con lector Qr para comprobantes digitales emitidos en web Afip, la misma genera una tabla obteniendo de una API la razon social del receptor del comprobante y el monto de la factura. Es usado por empresa de reparto para la liquidacion de cobranzas.
 
 <div align="center">
 <img
